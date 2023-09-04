@@ -15,6 +15,7 @@ public class PlayerCombat : NetworkBehaviour,IDamageable
     [SerializeField] bool m_noBlood = false;
     [SerializeField] private float dodgeDuration = 8.0f / 14.0f;
     [SerializeField] float health = 100;
+    BoxCollider attackPointCollider;
 
     private bool isHit;
     private Rigidbody2D myRigidBody;
@@ -48,15 +49,17 @@ public class PlayerCombat : NetworkBehaviour,IDamageable
             animator.SetTrigger("die");
             Destroy(gameObject,30f);
         }
-
-        
     }
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
         myRigidBody = GetComponent<Rigidbody2D>();
         groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_HeroKnight>();
+        attackPointCollider = gameObject.GetComponentInChildren<BoxCollider>();
+
     }
+ 
     void Update()
     {
        

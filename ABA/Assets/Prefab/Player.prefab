@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8533620426437292012}
-  - component: {fileID: 836152781}
+  - component: {fileID: 1326512385}
+  - component: {fileID: 1326512386}
   m_Layer: 0
   m_Name: AttackPoint
   m_TagString: Player
@@ -25,26 +26,52 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124232063804164232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.54, y: 0.61, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 454366058885595992}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &836152781
-BoxCollider:
+--- !u!114 &1326512385
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124232063804164232}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d442e09f5ac13d648b6043ef9481eb61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPower: 1
+--- !u!61 &1326512386
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124232063804164232}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.34, y: 0.24, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &2688291131847200527
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,7 +89,7 @@ GameObject:
   - component: {fileID: 7426808164153757088}
   - component: {fileID: 7750241560673602983}
   - component: {fileID: 1997295426751858273}
-  - component: {fileID: 2054630634}
+  - component: {fileID: 275289661}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -291,7 +318,7 @@ MonoBehaviour:
   health: 100
   attackDamage: 1
   playerHealth: 100
---- !u!114 &2054630634
+--- !u!114 &275289661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -300,10 +327,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2688291131847200527}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d442e09f5ac13d648b6043ef9481eb61, type: 3}
+  m_Script: {fileID: 11500000, guid: 26f5c4ffcf7f67d46b9199ef6229989f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPower: 1
+  health: 100
+  attack: 10
 --- !u!1 &8287166543649229468
 GameObject:
   m_ObjectHideFlags: 0
