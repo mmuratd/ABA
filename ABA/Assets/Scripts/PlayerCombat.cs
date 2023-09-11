@@ -9,45 +9,36 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerCombat : NetworkBehaviour,IDamageable
 {
-    [SerializeField] float m_speed = 4.0f;
-    [SerializeField] float m_jumpForce = 7.5f;
-    [SerializeField] float m_rollForce = 6.0f;
-    [SerializeField] bool m_noBlood = false;
-    [SerializeField] private float dodgeDuration = 8.0f / 14.0f;
-    [SerializeField] float health = 100;
-    BoxCollider attackPointCollider;
+    [SerializeField] float mySpeed = 4.0f;
+    [SerializeField] float myJumpForce = 7.5f;
+    [SerializeField] float dodgeDuration = 8.0f / 14.0f;
+    [SerializeField] float attackDamage = 1f;
+    [SerializeField] float playerHealth = 100f;
 
-    private bool isHit;
     private Rigidbody2D myRigidBody;
     private bool isTouchingGround = false;
-    private bool isDodging = false;
-    private float dodgeCurrentTime;
 
-    private Sensor_HeroKnight groundSensor;
 
     Animator animator;
-    LayerMask enemyLayers;
+
 
     //Attack parametreleri
     private int currentAttack = 0;
     private float timeSinceAttack = 0.0f;
     private bool canAttack = true;
-    [SerializeField] private float attackDamage = 1f;
-    [SerializeField] private float playerHealth = 100f;
-    private bool isDead;
+
+
 
     public void Damage(int damageAmount)
     {
-        health--;
+        playerHealth--;
         animator.SetTrigger("Hurt");
-        isHit = true;
 
-        if (health<1)
+        if (playerHealth < 1)
         {
             GetComponent<Collider2D> ().enabled = false;
-            isDead = true;
             animator.SetTrigger("die");
-            Destroy(gameObject,30f);
+            Destroy(gameObject,10f);
         }
     }
 
@@ -55,8 +46,6 @@ public class PlayerCombat : NetworkBehaviour,IDamageable
     {
         animator = GetComponent<Animator>();
         myRigidBody = GetComponent<Rigidbody2D>();
-        groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_HeroKnight>();
-        attackPointCollider = gameObject.GetComponentInChildren<BoxCollider>();
 
     }
  
@@ -84,7 +73,7 @@ public class PlayerCombat : NetworkBehaviour,IDamageable
             animator.SetTrigger("Jump");
             isTouchingGround = false;
             animator.SetBool("Grounded", isTouchingGround);
-            myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, m_jumpForce);
+            myRigidBody.velocity = new Vector2(myRigidBody.velocity.x, myJumpForce);
         }
     }
 
@@ -92,7 +81,7 @@ public class PlayerCombat : NetworkBehaviour,IDamageable
     {
         // -- Handle input and movement --
         float inputX = Input.GetAxis("Horizontal");
-        myRigidBody.velocity = new Vector2(inputX * m_speed, myRigidBody.velocity.y);//Movement
+        myRigidBody.velocity = new Vector2(inputX * mySpeed, myRigidBody.velocity.y);//Movement
         // Swap direction of sprite depending on walk direction
         if (inputX > 0)
         {
@@ -130,10 +119,8 @@ public class PlayerCombat : NetworkBehaviour,IDamageable
 
     void Block()
     {
-
         animator.SetTrigger("Block");
         animator.SetBool("IdleBlock", true);
-
 
     }
 }
